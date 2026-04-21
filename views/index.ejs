@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AQI Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="/style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+
+<!-- 🔷 NAVBAR -->
+<header class="navbar">
+  <h1>AQI Dashboard</h1>
+  <!-- <input type="text" placeholder="Search location..." /> -->
+</header>
+
+<!-- 🔥 HERO -->
+<section class="hero">
+
+  <div class="hero-card 
+  <%= data.pm25 <= 50 ? 'good' : 
+      data.pm25 <= 100 ? 'moderate' : 
+      data.pm25 <= 150 ? 'poor' : 
+      data.pm25 <= 200 ? 'unhealthy' : 'hazardous' %>">
+
+    <div class="left">
+      <h1> AQI : <%= data.pm25 %></h1>
+      <h3 class="status">
+        <%= data.pm25 <= 50 ? "Good" :
+            data.pm25 <= 100 ? "Moderate" :
+            data.pm25 <= 150 ? "Poor" :
+            data.pm25 <= 200 ? "Unhealthy" : "Hazardous" %>
+      </h3>
+
+      <div class="sub">
+        <span>PM2.5: <%= data.pm25 %></span>
+        <span>Temp: <%= data.temp %>°C</span>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="weather-box">
+        <h3>Temp: <%= data.temp %>°C</h3>
+        <p>Humidity: <%= data.humidity %>%</p>
+        <p>Gas: <%= data.gas %></p>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- 🌫️ POLLUTANTS -->
+ <h2  class="ph">Gas Pollutants</h2>
+<section class="pollutants">
+  
+  <div class="p-card">PM2.5 <h3><%= data.pm25 %></h3></div>
+  <div class="p-card">CO <h3><%= data.gas %></h3></div>
+  <div class="p-card">NO₂ <h3><%= data.no2 || 7 %></h3></div>
+  <div class="p-card">O₃ <h3><%= data.o3 || 3 %></h3></div>
+
+</section>
+
+<!-- 📊 CHART -->
+<section class="chart-section">
+  <div class="chart-container">
+    <h2 class="ph">AQI Chart</h2>
+    <canvas id="aqiChart"></canvas>
+  </div>
+</section>
+
+<!-- 📏 AQI SCALE -->
+<section class="scale">
+
+  <div class="scale-bar"></div>
+  <h2>AQI Scale</h2>
+
+  <div class="scale-grid">
+    <div class="scale-card good">Good (0–50)</div>
+    <div class="scale-card moderate">Moderate (51–100)</div>
+    <div class="scale-card poor">Poor (101–150)</div>
+    <div class="scale-card unhealthy">Unhealthy (151–200)</div>
+    <div class="scale-card hazardous">Hazardous (200+)</div>
+  </div>
+
+</section>
+
+<script>
+const chartData = <%- JSON.stringify(chartData) %>;
+
+new Chart(document.getElementById('aqiChart'), {
+  type: 'bar',
+  data: {
+    labels: chartData.map((_, i) => i),
+    datasets: [{
+      label: 'PM2.5',
+      data: chartData,
+      backgroundColor: chartData.map(v => {
+        if (v <= 50) return "#2ecc71";
+        if (v <= 100) return "#f1c40f";
+        if (v <= 150) return "#e67e22";
+        if (v <= 200) return "#e74c3c";
+        return "#8e44ad";
+      })
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false
+  }
+});
+</script>
+
+</body>
+</html>

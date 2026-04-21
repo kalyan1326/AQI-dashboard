@@ -1,0 +1,162 @@
+/* 🔥 BODY */
+body {
+  margin: 0;
+  font-family: 'Segoe UI';
+  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  color: white;
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 20px;
+}
+
+.navbar input {
+  padding: 8px;
+  border-radius: 10px;
+  border: none;
+}
+
+
+
+/* HERO */
+.hero {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.hero-card {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  max-width: 950px;
+  padding: 25px;
+  border-radius: 20px;
+  flex-wrap: wrap;
+  transition: 0.4s;
+}
+
+.left, .right {
+  flex: 1;
+  min-width: 250px;
+}
+
+.weather-box {
+  background: rgba(255,255,255,0.2);
+  padding: 15px;
+  border-radius: 15px;
+}
+
+/* AQI COLORS */
+.good { background: linear-gradient(135deg,#00c853,#64dd17); }
+.moderate { background: linear-gradient(135deg,#ffd600,#ffea00); color:black;}
+.poor { background: linear-gradient(135deg,#ff6f00,#ff8f00); }
+.unhealthy { background: linear-gradient(135deg,#d50000,#ff1744); }
+.hazardous { background: linear-gradient(135deg,#6a1b9a,#8e24aa); }
+
+/* POLLUTANTS */
+.pollutants {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 10px;
+  padding: 10px;
+  margin: 10px 25px 10px 25px ;
+}
+
+.ph{
+  text-align: center;
+}
+
+.p-card {
+  background: rgba(255,255,255,0.08);
+  padding: 15px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+/* CHART */
+.chart-section {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.chart-container {
+  width: 90%;
+  max-width: 700px;
+  height: 300px;
+  margin-bottom: 25px ;
+}
+
+/* SCALE */
+.scale {
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.scale-bar {
+  height: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  background: linear-gradient(to right,#2ecc71,#f1c40f,#e67e22,#e74c3c,#8e44ad);
+}
+
+.scale-grid {
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+  gap: 10px;
+}
+
+.scale-card {
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* 🔥 RESPONSIVE */
+@media (max-width: 768px) {
+
+  .navbar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .navbar input {
+    width: 100%;
+  }
+
+  .hero-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .pollutants {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .scale-grid {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .chart-container {
+    height: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .pollutants {
+    grid-template-columns: 1fr;
+  }
+
+  .scale-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-container {
+    height: 220px;
+  }
+}
